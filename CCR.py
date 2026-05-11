@@ -1,3 +1,6 @@
+You're asking for the full fixed code. Below is the complete corrected Python file content with the Markdown code fences removed and safety checks added to avoid the KeyError in get_sfrac calls when there are no non-phantom components at a given level.
+
+```python
 import io
 import re
 import pandas as pd
@@ -931,3 +934,4 @@ if st.session_state["mrp_results"] is not None:
         )
     except Exception as e:
         st.error(f"Search section error: {e}")
+```
