@@ -1,4 +1,3 @@
-```python
 import io
 import re
 import pandas as pd
@@ -189,7 +188,7 @@ def parse_export_file(export_file):
 
     date_cols = sorted(fg_demand["Date_col"].unique(), key=date_sort_key)
 
-    # ── Component production orders (SF01): open + confirmed ──
+    # ── Component production orders (SF01): open + confirmed ─
     sf_rows = df[df[otype_col] == COMP_ORDER_TYPE].copy()
     if not sf_rows.empty and ord_qty_col in sf_rows and del_qty_col in sf_rows:
         sf_rows["_open"] = (sf_rows[ord_qty_col] - sf_rows[del_qty_col]).clip(lower=0)
@@ -717,10 +716,10 @@ def run_mrp(export_file, stock_file, bom_file, receipt_file):
 
     # FIX: Ensure 'l1_norm' is not empty before calling 'get_sfrac'
     if not l1_norm.empty:
-        l1_sfrac = get_sfrac(l1_norm, "L1_Comp", "L1_Gross")
+        l1_s frac = get_sfrac(l1_norm, "L1_Comp", "L1_Gross")
     else:
-        l1_sfrac = {} # or handle as appropriate if no non-phantom components exist
-    
+        l1_sfrac = {}
+
     l1["L1_Eff"] = apply_sfrac(l1, "L1_Gross", "L1_Ph", l1_sfrac, "L1_Comp")
     l1_agg = (l1_norm.groupby(["L1_Comp","L1_Desc","Month","Month_Order"], as_index=False)
               ["L1_Gross"].sum()
@@ -920,8 +919,7 @@ elif run_btn:
             if results is not None:
                 st.session_state["mrp_results"] = results
         except Exception as e:
-            # Catching unexpected errors during the run to prevent app crash
-            st.exception(e) 
+            st.exception(e)
 
 if st.session_state["mrp_results"] is not None:
     r = st.session_state["mrp_results"]
@@ -933,4 +931,3 @@ if st.session_state["mrp_results"] is not None:
         )
     except Exception as e:
         st.error(f"Search section error: {e}")
-```
